@@ -1,0 +1,64 @@
+{
+    "name": "php-standard-library/repository-template",
+    "type": "library",
+    "description": "PHP Standard Library: Repository Template",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "azjezz",
+            "email": "azjezz@protonmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-bcmath": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-sodium": "*",
+        "azjezz/psl": "^1.5"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "php-standard-library/psalm-plugin": "^1.0",
+        "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^3.5",
+        "vimeo/psalm": "^4.6"
+    },
+    "config": {
+        "process-timeout": 1200,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Psl\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Psl\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs:check",
+            "@type:check",
+            "@security:analysis",
+            "@test:unit"
+        ],
+        "code:coverage": "php-coveralls -v",
+        "cs:check": [
+            "phpcs",
+            "php-cs-fixer fix --dry-run"
+        ],
+        "cs:fix": [
+            "phpcbf",
+            "php-cs-fixer fix"
+        ],
+        "security:analysis": "psalm --taint-analysis",
+        "test:unit": "phpunit",
+        "type:check": "psalm",
+        "type:coverage": "psalm --shepherd"
+    }
+}
